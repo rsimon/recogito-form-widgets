@@ -11,7 +11,7 @@ module.exports = {
   entry: resolveAppPath('src'),
   output: {
     filename: 'recogito-form-widgets.js',
-    library: ['recogito', 'FormWidgets'],
+    library: ['Recogito', 'Form'],
     libraryTarget: 'umd',
     libraryExport: 'default'
   },
