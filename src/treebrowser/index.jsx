@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
+import TreeView from './TreeView';
+
 import { load as loadJSKOS } from './jskos';
 
 let CACHED_TAXONOMY = null;
@@ -37,6 +39,6 @@ export default config => props => {
   }, []);
 
   return taxonomy ?
-    <div>Hello World</div> : <div>LOADING</div>;
+    <div><TreeView tree={taxonomy} /></div> : <div>LOADING</div>;
 
 }

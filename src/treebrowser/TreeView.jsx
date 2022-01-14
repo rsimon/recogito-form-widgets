@@ -11,7 +11,7 @@ const TreeNode = props => {
 
   const [ isOpen, setOpen ] = useState();
 
-  const label = props.node.getPrefLabel();
+  const label = props.node.getPrefLabel().label;
 
   const childNodes = props.tree.getChildren(props.node.uri)
     .map(n => toTreeNode(props.tree, n));
@@ -32,9 +32,7 @@ const TreeNode = props => {
       {label}
 
       {hasChildNodes && isOpen &&
-        <ul>
-          {props.childNodes}
-        </ul>
+        <ul>{childNodes}</ul>
       }
     </li>
   );

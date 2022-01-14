@@ -20,8 +20,24 @@ export class TreeNode {
     this.parent = parent;
   }
 
-  get label(optLang) {
-    return this.labels.find(l => l.lang === optLang);
+  getPrefLabel = optLang => {
+    // Exact match for language or optLang === null
+    const exactMatch = this.labels.find(l => l.lang === optLang);
+
+    if (exactMatch)
+      return exactMatch;
+
+    // Fallbacks
+    if (optLang) {
+      // There is no match for this language - use first in list
+      return this.labels[0];
+    } else {
+      // There is no match without language - use EN or first
+      // TODO use browser locale instead of EN?
+      const fallback = this.labels.find(l => l.lang.toLowerCase() === 'en');
+      return fallback ? fallback : this.labels[0];
+    }
+    
   } 
 
 }
