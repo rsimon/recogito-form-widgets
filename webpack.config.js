@@ -15,7 +15,6 @@ module.exports = {
     libraryTarget: 'umd',
     libraryExport: 'default'
   },
-  
   externals: {
     'react': 'React',
     'react-dom': 'ReactDOM'

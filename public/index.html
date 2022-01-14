@@ -50,10 +50,13 @@
     <script type="text/javascript">
       window.onload = function() {
         var r = Recogito.init({
-          content: 'content'
+          content: 'content',
+          widgets: [
+            'COMMENT',
+            'TAG',
+            Recogito.Form.TreeBrowser()
+          ]
         });
-
-        Recogito.Form.TreeBrowser(r);
 
         r.on('createAnnotation', function(a) {
           console.log('created', a);
