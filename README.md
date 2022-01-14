@@ -1,3 +1,3 @@
 # Recogito Form Widgets
 
-Annotorious/RecogitoJS editor widgets for common (and not so common) form inputs.
+Annotorious/RecogitoJS editor widgets with common (and not so common) form components.
