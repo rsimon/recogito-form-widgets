@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import TaxonomyTagWidget from './tag/TaxonomyTagWidget';
+import TaxonomyWidget from './TaxonomyWidget';
 
 import { load as loadJSKOS } from './load/jskos';
 
@@ -41,10 +41,9 @@ export default config => () => {
   }, []);
 
   return taxonomy ?
-    <TaxonomyTagWidget 
+    <TaxonomyWidget 
       config={config}
-      taxonomy={taxonomy} />
-    
+      taxonomy={taxonomy} />    
     :
 
     <div>LOADING</div>;

@@ -2,11 +2,7 @@ import React from 'react';
 import { BiNetworkChart } from 'react-icons/bi';
 import { RiNodeTree } from 'react-icons/ri';
 
-const TaxonomyTagWidget = props => {
-
-  const toggleTreeBrowser = () => {
-    console.log('click');
-  }
+const TaxonomyTagInput = props => {
 
   return (
     <div className="r6o-widget r6o-taxonomy">
@@ -17,7 +13,7 @@ const TaxonomyTagWidget = props => {
 
       <button
         className="r6o-taxonomy-open-treebrowser"
-        onClick={toggleTreeBrowser}>
+        onClick={props.onToggleTreebrowser}>
         <RiNodeTree />
       </button>
     </div>
@@ -25,4 +21,4 @@ const TaxonomyTagWidget = props => {
 
 }
 
-export default TaxonomyTagWidget;
+export default TaxonomyTagInput;
