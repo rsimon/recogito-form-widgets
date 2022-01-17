@@ -16,15 +16,24 @@ const loadTaxonomy = async config => {
   else 
     throw new `Unsupported taxonomy format: ${config.format}`
 
-  // Switch between different formats based on config later!
-  return fetch(config.src)
-    .then(response => response.json())
-    .then(result => {
-      const taxonomy = loadFn(result);
+  if (config.src) {
+    return fetch(config.src)
+      .then(response => response.json())
+      .then(result => {
+        const taxonomy = loadFn(result);
 
+        CACHED_TAXONOMY = taxonomy;
+        return taxonomy;
+      });
+  } else if (config.taxonomy) {
+    return new Promise(resolve => {
+      const taxonomy = loadFn(config.taxonomy);
       CACHED_TAXONOMY = taxonomy;
-      return taxonomy;
+      resolve(taxonomy);
     });
+  } else {
+    throw new "No taxonomy defined. Please provide a taxonomy object or source URL";
+  }
 }
 
 export default config => () => {
