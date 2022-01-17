@@ -1,16 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Draggable from 'react-draggable';
+import { Rnd } from 'react-rnd';
 import { RiCloseFill } from 'react-icons/ri';
 import TreeView from './TreeView';
 
 const TaxonomyBrowser = props => {
 
   return ReactDOM.createPortal(
-    <Draggable handle="header">
+    <Rnd 
+      default={{
+        x: 10,
+        y: 10,
+        width: 440,
+        height:340
+      }}
+      dragHandleClassName="handle">
       <div className="r6o-taxonomy r6o-taxonomybrowser">
         <div className="r6o-taxonomy r6o-taxonomybrowser-wrapper">
-          <header>
+          <header className="handle">
             <label>Taxonomy</label>
             <RiCloseFill
               className="icon close" 
@@ -25,7 +32,7 @@ const TaxonomyBrowser = props => {
           </main>
         </div>
       </div>
-    </Draggable>,
+    </Rnd>,
 
     document.body
   );
