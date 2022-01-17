@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 
 // Shorthand
-const toTreeNode = (tree, node, openStates, onSetOpen) =>
+const toTreeNode = (taxonomy, node, openStates, onSetOpen) =>
   <TreeNode
     key={node.uri} 
-    tree={tree} 
+    taxonomy={taxonomy} 
     node={node} 
     openStates={openStates}
     onSetOpen={onSetOpen} /> 
@@ -17,9 +17,9 @@ const TreeNode = props => {
 
   const isOpen = props.openStates.find(u => u === uri);
 
-  const childNodes = props.tree.getChildren(props.node.uri)
+  const childNodes = props.taxonomy.getChildren(props.node.uri)
     .map(n => toTreeNode(
-      props.tree, 
+      props.taxonomy, 
       n,
       props.openStates,
       props.onSetOpen));
@@ -60,9 +60,9 @@ const TreeView = props => {
     }
   }
 
-  const rootNodes = props.tree.rootNodes
+  const rootNodes = props.taxonomy.rootTerms
     .map(n => toTreeNode(
-      props.tree, 
+      props.taxonomy, 
       n, 
       openLeaves,
       onSetLeafState));

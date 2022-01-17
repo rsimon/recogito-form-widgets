@@ -2,4 +2,32 @@
   position:absolute;
   top:10px;
   left:10px;
+  width:440px;
+  height:340px;
+  background-color:#fff;
+  z-index:99999;
+  overflow:hidden;
+  @include rounded-corners(3px);
+  @include box-shadow(2px, 2px, 42px, 0.4);
+
+  header {
+    background-color:$ocean;
+    color:#fff;
+    cursor:move;
+    padding:10px;
+    position:relative;
+
+    .icon.close {
+      position:absolute;
+      font-size:30px;
+      top:4px;
+      right:4px;
+      cursor:pointer;
+    }
+  }
+
+  main {
+
+  }
+
 }

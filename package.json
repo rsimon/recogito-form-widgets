@@ -38,6 +38,7 @@
   },
   "dependencies": {
     "@recogito/recogito-client-core": "^1.7.0",
+    "react-draggable": "^4.4.4",
     "react-icons": "^4.3.1"
   }
 }
