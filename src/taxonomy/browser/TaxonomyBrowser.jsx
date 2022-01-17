@@ -9,18 +9,21 @@ const TaxonomyBrowser = props => {
   return ReactDOM.createPortal(
     <Draggable handle="header">
       <div className="r6o-taxonomy r6o-taxonomybrowser">
-        <header>
-          <label>Taxonomy</label>
-          <RiCloseFill
-            className="icon close" 
-            onClick={props.onClose} />
-        </header>
+        <div className="r6o-taxonomy r6o-taxonomybrowser-wrapper">
+          <header>
+            <label>Taxonomy</label>
+            <RiCloseFill
+              className="icon close" 
+              onClick={props.onClose} />
+          </header>
 
-        <main>
-          <TreeView 
-            config={props.config}
-            taxonomy={props.taxonomy} />
-        </main>
+          <main>
+            <TreeView 
+              config={props.config}
+              taxonomy={props.taxonomy}
+              onSelect={props.onSelectTerm} />
+          </main>
+        </div>
       </div>
     </Draggable>,
 

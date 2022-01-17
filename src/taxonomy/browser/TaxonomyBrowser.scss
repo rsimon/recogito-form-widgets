@@ -10,7 +10,15 @@
   @include rounded-corners(3px);
   @include box-shadow(2px, 2px, 42px, 0.4);
 
+  .r6o-taxonomybrowser-wrapper {
+    max-height:100%;
+    display:flex;
+    flex-direction:column;
+    align-items:stretch;
+  }
+
   header {
+    flex:0;
     background-color:$ocean;
     color:#fff;
     cursor:move;
@@ -27,6 +35,48 @@
   }
 
   main {
+    flex:0;
+    padding:10px 0;
+    overflow-y:auto;
+    margin-left:-20px;
+    padding-bottom:40px;
+    
+    ul {
+      list-style-type:none;
+      padding:6px 0 0 38px;
+      margin:0;
+    }
+
+    li {
+      padding:3px 0;
+
+      label {
+        cursor:pointer;
+      }
+
+      label:hover {
+        color:$ocean;
+        text-decoration:underline;
+      }
+    
+    }
+
+    .expand, .vertical-line {
+      font-size:20px;
+      vertical-align:bottom;
+    }
+
+    .vertical-line {
+      padding-right:2px;
+      color:$lightblue-type;
+      transform:rotateZ(90deg) scaleX(1.7) translateY(1px) translateX(2px);
+    }
+
+    .expand {
+      cursor:pointer;
+      color:$ocean;
+      padding-right:4px;
+    }
 
   }
 

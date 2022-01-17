@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
+import { AiOutlineLine, AiOutlinePlusCircle, AiOutlineMinusCircle } from 'react-icons/ai';
 
 // Shorthand
-const toTreeNode = (taxonomy, node, openStates, onSetOpen) =>
+const toTreeNode = (taxonomy, node, openStates, onSelect, onSetOpen) =>
   <TreeNode
     key={node.uri} 
     taxonomy={taxonomy} 
     node={node} 
     openStates={openStates}
+    onSelect={onSelect}
     onSetOpen={onSetOpen} /> 
 
 const TreeNode = props => {
@@ -22,22 +24,33 @@ const TreeNode = props => {
       props.taxonomy, 
       n,
       props.openStates,
+      props.onSelect,
       props.onSetOpen));
 
   // Shorthand
   const hasChildNodes = childNodes.length > 0;
 
+  const onSelect = () => 
+    props.onSelect(props.node);
+
   return (
     <li>
+      <AiOutlineLine
+        className="vertical-line" />
+
       {hasChildNodes && isOpen &&
-        <span onClick={() => props.onSetOpen(uri, false)} className="icon">-</span>
+        <AiOutlineMinusCircle
+          className="expand"
+          onClick={() => props.onSetOpen(uri, false)} />
       }
 
       {hasChildNodes && !isOpen &&
-        <span onClick={() => props.onSetOpen(uri, true)} className="icon">+</span>
+        <AiOutlinePlusCircle
+          className="expand"
+          onClick={() => props.onSetOpen(uri, true)} />
       }
 
-      {label}
+      <label onClick={onSelect}>{label}</label>
 
       {hasChildNodes && isOpen &&
         <ul>{childNodes}</ul>
@@ -65,6 +78,7 @@ const TreeView = props => {
       props.taxonomy, 
       n, 
       openLeaves,
+      props.onSelect,
       onSetLeafState));
 
   return (
