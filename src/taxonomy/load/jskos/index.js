@@ -1,4 +1,4 @@
-import { Tree, TreeNode } from '../Tree';
+import { Taxonomy, Term } from '../../Taxonomy';
 
 const parseLabels = obj => {
 
@@ -22,17 +22,17 @@ const parseLabels = obj => {
  */
 export const load = json => {
 
-  const nodes = json.map(obj => {
+  const terms = json.map(obj => {
     const parent = obj.broader &&
       (Array.isArray(obj.broader) ? obj.broader[0].uri : obj.broader.uri);
 
-    return new TreeNode(
+    return new Term(
       obj.uri,
       parseLabels(obj),
       parent
     )
   });
 
-  return new Tree(nodes);
+  return new Taxonomy(terms);
 
 }

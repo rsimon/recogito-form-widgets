@@ -1,7 +1,3 @@
-import TreeBrowser from './treebrowser';
+import Taxonomy from './taxonomy';
 
-export default {
-
-  TreeBrowser
-
-}
+export default { Taxonomy };

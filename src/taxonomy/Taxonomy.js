@@ -8,7 +8,7 @@ const normalizeLabels = labels => {
   }
 }
 
-export class TreeNode {
+export class Term {
 
   constructor(uri, labels, parent) {
     this.uri = uri;
@@ -42,14 +42,14 @@ export class TreeNode {
 
 }
 
-export class Tree {
+export class Taxonomy {
 
-  constructor(nodes) {
-    this.rootNodes = nodes.filter(n => !n.parent);
-    this.leafNodes = nodes.filter(n => n.parent);
+  constructor(terms) {
+    this.rootTerms = terms.filter(n => !n.parent);
+    this.leafTerms = terms.filter(n => n.parent);
   }
 
   getChildren = uri =>
-    this.leafNodes.filter(n => n.parent === uri);
+    this.leafTerms.filter(n => n.parent === uri);
 
 }

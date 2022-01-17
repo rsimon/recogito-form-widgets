@@ -1,0 +1,22 @@
+.r6o-widget.r6o-taxonomy {
+  padding:4px 8px;
+  background-color:$blueish-white;
+  
+  .r6o-taxonomy-input-placeholder {
+    display:inline-block;
+    color:#c2c2c2;
+    font-size:20px;
+    vertical-align:middle;
+  }
+
+  button.r6o-taxonomy-open-treebrowser {
+    position:absolute;
+    right:8px;
+    font-size:20px;
+    vertical-align:middle;
+    background:none;
+    outline:none;
+    border:none;
+  }
+
+}

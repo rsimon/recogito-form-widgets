@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 
-import TreeView from './TreeView';
+import TaxonomyTagWidget from './tag/TaxonomyTagWidget';
 
-import { load as loadJSKOS } from './jskos';
+import { load as loadJSKOS } from './load/jskos';
+
+import './index.scss';
 
 let CACHED_TAXONOMY = null;
 
@@ -25,7 +27,7 @@ const loadTaxonomy = async config => {
     });
 }
 
-export default config => props => {
+export default config => () => {
 
   const [ taxonomy, setTaxonomy ] = useState();
 
@@ -39,6 +41,12 @@ export default config => props => {
   }, []);
 
   return taxonomy ?
-    <div><TreeView tree={taxonomy} /></div> : <div>LOADING</div>;
+    <TaxonomyTagWidget 
+      config={config}
+      taxonomy={taxonomy} />
+    
+    :
+
+    <div>LOADING</div>;
 
 }
