@@ -1,20 +1,28 @@
 import React, { useState } from 'react';
 
 // Shorthand
-const toTreeNode = (tree, node) =>
+const toTreeNode = (tree, node, openStates, onSetOpen) =>
   <TreeNode
     key={node.uri} 
     tree={tree} 
-    node={node} /> 
+    node={node} 
+    openStates={openStates}
+    onSetOpen={onSetOpen} /> 
 
 const TreeNode = props => {
 
-  const [ isOpen, setOpen ] = useState();
+  const uri = props.node.uri;
 
   const label = props.node.getPrefLabel().label;
 
+  const isOpen = props.openStates.find(u => u === uri);
+
   const childNodes = props.tree.getChildren(props.node.uri)
-    .map(n => toTreeNode(props.tree, n));
+    .map(n => toTreeNode(
+      props.tree, 
+      n,
+      props.openStates,
+      props.onSetOpen));
 
   // Shorthand
   const hasChildNodes = childNodes.length > 0;
@@ -22,11 +30,11 @@ const TreeNode = props => {
   return (
     <li>
       {hasChildNodes && isOpen &&
-        <span onClick={() => setOpen(false)} className="icon">-</span>
+        <span onClick={() => props.onSetOpen(uri, false)} className="icon">-</span>
       }
 
       {hasChildNodes && !isOpen &&
-        <span onClick={() => setOpen(true)} className="icon">+</span>
+        <span onClick={() => props.onSetOpen(uri, true)} className="icon">+</span>
       }
 
       {label}
@@ -41,8 +49,23 @@ const TreeNode = props => {
 
 const TreeView = props => {
 
+  // Lazy records which leaves are in open state
+  const [ openLeaves, setOpenLeaves ] = useState([]);
+
+  const onSetLeafState = (uri, open) => {
+    if (open && !openLeaves.includes(uri)) {
+      setOpenLeaves([...openLeaves, uri]);
+    } else {
+      setOpenLeaves(openLeaves.filter(l => l !== uri));
+    }
+  }
+
   const rootNodes = props.tree.rootNodes
-    .map(n => toTreeNode(props.tree, n));
+    .map(n => toTreeNode(
+      props.tree, 
+      n, 
+      openLeaves,
+      onSetLeafState));
 
   return (
     <ul>
