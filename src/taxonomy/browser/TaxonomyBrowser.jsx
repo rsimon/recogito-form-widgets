@@ -18,7 +18,7 @@ const TaxonomyBrowser = props => {
       <div className="r6o-taxonomy r6o-taxonomybrowser">
         <div className="r6o-taxonomy r6o-taxonomybrowser-wrapper">
           <header className="handle">
-            <label>Taxonomy</label>
+            <h1>Taxonomy</h1>
             <RiCloseFill
               className="icon close" 
               onClick={props.onClose} />
