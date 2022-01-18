@@ -8,7 +8,7 @@ import TaxonomyBrowser from './browser/TaxonomyBrowser';
  * taxonomy tag. 
  */
 const includes = (annotation, tag) => {
-  const tags = annotation.bodies.filter(b => b.purpose === 'classifying');
+  const tags = annotation.bodies.filter(b => b.purpose === 'identifying');
   return tags.find(t => t.source?.id === tag.uri);
 }
 
@@ -27,7 +27,7 @@ const TaxonomyWidget = props => {
     if (!includes(props.annotation, term)) {
       const body = {
         type: 'SpecificResource',
-        purpose: 'classifying',
+        purpose: 'identifying',
         source: {
           id: term.uri,
           label: term.getPrefLabel().label

@@ -4,7 +4,7 @@ import { RiNodeTree } from 'react-icons/ri';
 
 const TaxonomyTagInput = props => {
 
-  const tags = props.annotation.bodies.filter(b => b.purpose === 'classifying');
+  const tags = props.annotation.bodies.filter(b => b.purpose === 'identifying');
 
   return (
     <div className="r6o-widget r6o-taxonomy r6o-tag">
