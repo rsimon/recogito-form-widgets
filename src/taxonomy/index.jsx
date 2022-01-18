@@ -46,7 +46,7 @@ const loadTaxonomy = async config => {
   }
 }
 
-export default config => () => {
+export default config => props => {
 
   const [ taxonomy, setTaxonomy ] = useState();
 
@@ -61,6 +61,7 @@ export default config => () => {
 
   return taxonomy ?
     <TaxonomyWidget 
+      {...props}
       config={config}
       taxonomy={taxonomy} />    
     :
