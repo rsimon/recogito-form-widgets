@@ -51,6 +51,7 @@
     }
 
     li {
+      position:relative;
       padding:3px 0;
 
       label {
@@ -64,6 +65,25 @@
     
     }
 
+    li:last-child .vertical-line {
+      transform: translateX(2.5px) scaleX(0.5);
+    }
+
+    li:last-child::before {
+      content:'';
+      display:block;
+      height:12px;
+      width:0;
+      position:absolute;
+      top:0;
+      left:9px;
+      border-left:2px solid $lightblue-type;
+    }
+
+    li:not(*:last-child) .vertical-line {
+      transform:rotateZ(90deg) scaleX(1.7) translateY(1px) translateX(2px);
+    }
+
     .expand, .vertical-line {
       font-size:20px;
       vertical-align:bottom;
@@ -72,7 +92,6 @@
     .vertical-line {
       padding-right:2px;
       color:$lightblue-type;
-      transform:rotateZ(90deg) scaleX(1.7) translateY(1px) translateX(2px);
     }
 
     .expand {
