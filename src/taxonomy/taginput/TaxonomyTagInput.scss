@@ -8,23 +8,24 @@
     color:#c2c2c2;
     font-size:20px;
     vertical-align:middle;
+    padding-top:4px;
   }
 
   button.r6o-taxonomy-open-treebrowser {
     position:absolute;
     right:9px;
-    top:5px;
+    top:6px;
     padding:3px 7px 0 8px;
     font-size:18px;
     color:$ocean;
     background:none;
     outline:none;
-    border:1px solid $ocean;
+    border:1px solid transparent;
     border-radius:3px;
     cursor:pointer;
   }
 
   button.r6o-taxonomy-open-treebrowser:hover{
-    background-color:#fff;
+    border-color:$ocean;
   }
 }

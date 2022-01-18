@@ -3,14 +3,12 @@ import React, { useState } from 'react';
 import TaxonomyTagInput from './taginput/TaxonomyTagInput';
 import TaxonomyBrowser from './browser/TaxonomyBrowser';
 
-const CLASSIFYING = 'classifying';
-
 /**
  * Tests if the annotation already contains this
  * taxonomy tag. 
  */
 const includes = (annotation, tag) => {
-  const tags = annotation.bodies.filter(b => b.purpose === CLASSIFYING);
+  const tags = annotation.bodies.filter(b => b.purpose === 'classifying');
   return tags.find(t => t.source?.id === tag.uri);
 }
 
@@ -29,7 +27,7 @@ const TaxonomyWidget = props => {
     if (!includes(props.annotation, term)) {
       const body = {
         type: 'SpecificResource',
-        purpose: CLASSIFYING,
+        purpose: 'classifying',
         source: {
           id: term.uri,
           label: term.getPrefLabel().label
@@ -44,14 +42,12 @@ const TaxonomyWidget = props => {
   return (
     <>
       <TaxonomyTagInput 
-        config={props.config}
-        taxonomy={props.taxonomy} 
+        {...props}
         onToggleTreebrowser={onToggleTreebrowser} />
 
       {isTreebrowserOpen && 
         <TaxonomyBrowser
-          config={props.config} 
-          taxonomy={props.taxonomy} 
+          {...props}
           onSelectTerm={onSelectTerm}
           onClose={onCloseTreebrowser} /> 
       }
