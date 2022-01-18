@@ -11,7 +11,7 @@ let CACHED_TAXONOMY = null;
 const determineLoader = config => {
   // Loader is either the user-defined crosswalk, or defined by the format
   if (config.crosswalk)
-    return config.crosswalk;
+    return json => loadJSKON(config.crosswalk(json));
 
   // Default taxonomy format is JSKOS
   const format = config.format?.toLowerCase() || 'jskos';
