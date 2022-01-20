@@ -47,9 +47,20 @@ export class Taxonomy {
   constructor(terms) {
     this.rootTerms = terms.filter(n => !n.parent);
     this.leafTerms = terms.filter(n => n.parent);
+
+    this.allTermsSorted = [...this.rootTerms, ...this.leafTerms];
+    this.allTermsSorted.sort((a, b) => {
+      const labelA = a.getPrefLabel();
+      const labelB = b.getPrefLabel();
+
+      return labelB - labelA;
+    });
   }
 
   getChildren = uri =>
     this.leafTerms.filter(n => n.parent === uri);
+
+  listTerms = () =>
+    this.allTermsSorted;
 
 }
