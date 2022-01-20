@@ -2,9 +2,19 @@ import React from 'react';
 import { BiNetworkChart } from 'react-icons/bi';
 import { RiNodeTree } from 'react-icons/ri';
 
+import Autocomplete from '@recogito/recogito-client-core/src/editor/widgets/Autocomplete';
+
 const TaxonomyTagInput = props => {
 
   const tags = props.annotation.bodies.filter(b => b.purpose === 'identifying');
+
+  const onInputChange = str => {
+    // TODO
+  }
+
+  const onInputSubmit = label => {
+    // TODO
+  }
 
   return (
     <div className="r6o-widget r6o-taxonomy r6o-tag">
@@ -23,6 +33,15 @@ const TaxonomyTagInput = props => {
             </li>
           )}
         </ul>
+      }
+
+      {!props.readOnly &&
+        <Autocomplete 
+          focus={props.focus}
+          placeholder="Taxonomie durchsuchen..."
+          vocabulary={[]}
+          onChange={onInputChange}
+          onSubmit={onInputSubmit}/>
       }
 
       <button
