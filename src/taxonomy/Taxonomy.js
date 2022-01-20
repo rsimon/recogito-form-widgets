@@ -57,6 +57,9 @@ export class Taxonomy {
     });
   }
 
+  findByURI = uri => 
+    this.allTermsSorted.find(t => t.uri === uri);
+
   getChildren = uri =>
     this.leafTerms.filter(n => n.parent === uri);
 

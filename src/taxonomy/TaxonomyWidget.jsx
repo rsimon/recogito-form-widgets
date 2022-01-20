@@ -22,7 +22,7 @@ const TaxonomyWidget = props => {
   const onToggleTreebrowser = () =>
     setTreebrowserOpen(!isTreebrowserOpen);
 
-  const onSelectTerm = term => {
+  const onAddTerm = term => {
     // Don't add more than once!
     if (!includes(props.annotation, term)) {
       const body = {
@@ -43,12 +43,13 @@ const TaxonomyWidget = props => {
     <>
       <TaxonomyTagInput 
         {...props}
+        onAddTerm={onAddTerm}
         onToggleTreebrowser={onToggleTreebrowser} />
 
       {isTreebrowserOpen && 
         <TaxonomyBrowser
           {...props}
-          onSelectTerm={onSelectTerm}
+          onSelectTerm={onAddTerm}
           onClose={onCloseTreebrowser} /> 
       }
     </>

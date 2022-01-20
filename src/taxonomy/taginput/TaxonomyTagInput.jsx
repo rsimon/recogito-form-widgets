@@ -8,13 +8,13 @@ const TaxonomyTagInput = props => {
 
   const tags = props.annotation.bodies.filter(b => b.purpose === 'identifying');
 
-  const onInputChange = str => {
-    // TODO
+  const onInputSubmit = ({ uri }) => {
+    const term = props.taxonomy.findByURI(uri);
+    props.onAddTerm(term);
   }
 
-  const onInputSubmit = label => {
-    // TODO
-  }
+  const vocabulary = props.taxonomy.listTerms().map(term =>
+    ({ uri: term.uri, label: term.getPrefLabel().label }));
 
   return (
     <div className="r6o-widget r6o-taxonomy r6o-tag">
@@ -39,8 +39,7 @@ const TaxonomyTagInput = props => {
         <Autocomplete 
           focus={props.focus}
           placeholder="Taxonomie durchsuchen..."
-          vocabulary={[]}
-          onChange={onInputChange}
+          vocabulary={vocabulary}
           onSubmit={onInputSubmit}/>
       }
 
