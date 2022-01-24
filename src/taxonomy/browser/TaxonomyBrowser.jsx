@@ -9,9 +9,9 @@ const TaxonomyBrowser = props => {
   return ReactDOM.createPortal(
     <Rnd 
       default={{
-        x: 10,
-        y: 10,
-        width: 440,
+        x: Math.min(props.openAt.x, window.innerWidth - 470),
+        y: props.openAt.y + window.scrollY,
+        width:440,
         height:340
       }}
       dragHandleClassName="handle">

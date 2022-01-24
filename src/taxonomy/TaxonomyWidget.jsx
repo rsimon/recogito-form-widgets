@@ -14,13 +14,17 @@ const includes = (annotation, tag) => {
 
 const TaxonomyWidget = props => {
 
-  const [ isTreebrowserOpen, setTreebrowserOpen ] = useState(false);
+  const [ treebrowserOpenAt, setTreebrowserOpen ] = useState(false);
 
   const onCloseTreebrowser = () => 
     setTreebrowserOpen(false);
 
-  const onToggleTreebrowser = () =>
-    setTreebrowserOpen(!isTreebrowserOpen);
+  const onToggleTreebrowser = evt => {
+    if (treebrowserOpenAt)
+      setTreebrowserOpen(false);
+    else
+      setTreebrowserOpen({ x: evt.clientX, y: evt.clientY });
+  }
 
   const onAddTerm = term => {
     // Don't add more than once!
@@ -46,8 +50,9 @@ const TaxonomyWidget = props => {
         onAddTerm={onAddTerm}
         onToggleTreebrowser={onToggleTreebrowser} />
 
-      {isTreebrowserOpen && 
+      {treebrowserOpenAt && 
         <TaxonomyBrowser
+          openAt={treebrowserOpenAt}
           {...props}
           onSelectTerm={onAddTerm}
           onClose={onCloseTreebrowser} /> 
