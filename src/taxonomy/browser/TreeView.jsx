@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { AiOutlineLine, AiOutlinePlusCircle, AiOutlineMinusCircle } from 'react-icons/ai';
+import { AiOutlinePlusCircle, AiOutlineMinusCircle } from 'react-icons/ai';
 
 // Shorthand
 const toTreeNode = (taxonomy, node, openStates, onSelect, onSetOpen) =>
@@ -19,13 +19,17 @@ const TreeNode = props => {
 
   const isOpen = props.openStates.find(u => u === uri);
 
-  const childNodes = props.taxonomy.getChildren(props.node.uri)
-    .map(n => toTreeNode(
-      props.taxonomy, 
-      n,
-      props.openStates,
-      props.onSelect,
-      props.onSetOpen));
+  const children = props.taxonomy.getChildren(props.node.uri);
+
+  const childNodes = children.map((n, idx) => 
+      <TreeNode
+        key={n.uri} 
+        isLast={idx === children.length - 1}
+        taxonomy={props.taxonomy} 
+        node={n} 
+        openStates={props.openStates}
+        onSelect={props.onSelect}
+        onSetOpen={props.onSetOpen} />); 
 
   // Shorthand
   const hasChildNodes = childNodes.length > 0;
@@ -34,10 +38,7 @@ const TreeNode = props => {
     props.onSelect(props.node);
 
   return (
-    <li>
-      <AiOutlineLine
-        className="vertical-line" />
-
+    <li className={props.isLast && 'last'}>
       {hasChildNodes && isOpen &&
         <AiOutlineMinusCircle
           className="expand"
@@ -74,12 +75,15 @@ const TreeView = props => {
   }
 
   const rootNodes = props.taxonomy.rootTerms
-    .map(n => toTreeNode(
-      props.taxonomy, 
-      n, 
-      openLeaves,
-      props.onSelect,
-      onSetLeafState));
+    .map((n,idx) => 
+      <TreeNode
+        key={n.uri} 
+        isLast={idx === props.taxonomy.rootTerms.length - 1}
+        taxonomy={props.taxonomy} 
+        node={n} 
+        openStates={openLeaves}
+        onSelect={props.onSelect}
+        onSetOpen={onSetLeafState} />);
 
   return (
     <ul>
