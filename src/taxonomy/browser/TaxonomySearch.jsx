@@ -47,7 +47,11 @@ const TaxonomySearch = props => {
       if (selected) {
         props.onSelect(selected);
       } else if (highlightedIndex >= 0) {
+        // Preselect
         setSearch(results[highlightedIndex].getPrefLabel().label);
+        setResults([]);
+
+        props.onPreSelect(results[highlightedIndex]);
       }
     }
   }

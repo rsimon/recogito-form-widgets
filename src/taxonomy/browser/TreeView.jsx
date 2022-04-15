@@ -1,17 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { AiOutlinePlusCircle, AiOutlineMinusCircle } from 'react-icons/ai';
 
-// Shorthand
-const toTreeNode = (taxonomy, node, openStates, onSelect, onSetOpen) =>
-  <TreeNode
-    key={node.uri} 
-    taxonomy={taxonomy} 
-    node={node} 
-    openStates={openStates}
-    onSelect={onSelect}
-    onSetOpen={onSetOpen} /> 
-
 const TreeNode = props => {
+
+  const el = useRef();
 
   const uri = props.node.uri;
 
@@ -21,6 +13,11 @@ const TreeNode = props => {
 
   const children = props.taxonomy.getChildren(props.node.uri);
 
+  useEffect(() => {
+    if (el.current && props.highlighted === uri)
+      el.current.scrollIntoView({ behavior: 'smooth' });
+  }, []);
+
   const childNodes = children.map((n, idx) => 
       <TreeNode
         key={n.uri} 
@@ -28,6 +25,7 @@ const TreeNode = props => {
         taxonomy={props.taxonomy} 
         node={n} 
         openStates={props.openStates}
+        highlighted={props.highlighted}
         onSelect={props.onSelect}
         onSetOpen={props.onSetOpen} />); 
 
@@ -38,7 +36,9 @@ const TreeNode = props => {
     props.onSelect(props.node);
 
   return (
-    <li className={props.isLast && 'last'}>
+    <li
+      ref={el} 
+      className={props.isLast && 'last'}>
       {hasChildNodes && isOpen &&
         <AiOutlineMinusCircle
           className="expand"
@@ -51,7 +51,9 @@ const TreeNode = props => {
           onClick={() => props.onSetOpen(uri, true)} />
       }
 
-      <label onClick={onSelect}>{label}</label>
+      <label
+        className={props.highlighted === uri ? 'highlighted' : null} 
+        onClick={onSelect}>{label}</label>
 
       {hasChildNodes && isOpen &&
         <ul>{childNodes}</ul>
@@ -65,6 +67,15 @@ const TreeView = props => {
 
   // Lazy records which leaves are in open state
   const [ openLeaves, setOpenLeaves ] = useState([]);
+
+  useEffect(() => {
+    if (props.highlighted) {
+      const openLeaves = 
+        props.taxonomy.getParents(props.highlighted.uri).map(term => term.uri);
+
+      setOpenLeaves(openLeaves);
+    }
+  }, [ props.highlighted ]);
 
   const onSetLeafState = (uri, open) => {
     if (open && !openLeaves.includes(uri)) {
@@ -82,6 +93,7 @@ const TreeView = props => {
         taxonomy={props.taxonomy} 
         node={n} 
         openStates={openLeaves}
+        highlighted={props.highlighted?.uri}
         onSelect={props.onSelect}
         onSetOpen={onSetLeafState} />);
 

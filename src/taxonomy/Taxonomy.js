@@ -84,6 +84,19 @@ export class Taxonomy {
   getChildren = uri =>
     this.leafTerms.filter(n => n.parent === uri);
 
+  getParents = uri => {
+    const parents = [];
+
+    let parent = this.findByURI(this.findByURI(uri).parent);
+
+    while (parent) {
+      parents.push(parent);
+      parent = this.findByURI(parent.parent);
+    }
+
+    return parents;
+  }
+
   listTerms = () =>
     this.allTermsSorted;
 

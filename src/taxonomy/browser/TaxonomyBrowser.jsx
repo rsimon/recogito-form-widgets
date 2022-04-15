@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import { Rnd } from 'react-rnd';
 import { RiCloseFill } from 'react-icons/ri';
@@ -8,6 +8,8 @@ import TaxonomySearch from './TaxonomySearch';
 
 const TaxonomyBrowser = props => {
 
+  const [ preselected, setPreselected ] = useState(null);
+  
   return ReactDOM.createPortal(
     <Rnd 
       default={{
@@ -28,11 +30,13 @@ const TaxonomyBrowser = props => {
 
           <TaxonomySearch 
               taxonomy={props.taxonomy} 
+              onPreSelect={setPreselected}
               onSelect={props.onSelectTerm} />
 
           <main>
             <TreeView 
               taxonomy={props.taxonomy}
+              highlighted={preselected}
               onSelect={props.onSelectTerm} />
           </main>
         </div>

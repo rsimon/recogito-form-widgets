@@ -140,7 +140,14 @@
         line-height:20px;
 
         label {
+          display:inline-block;
+          padding:0 2px;
           cursor:pointer;
+          @include rounded-corners(2px);
+        }
+
+        label.highlighted {
+          background-color:#ffcf78;
         }
 
         label:hover {
