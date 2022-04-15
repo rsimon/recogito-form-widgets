@@ -26,12 +26,12 @@ const TaxonomyBrowser = props => {
               onClick={props.onClose} />
           </header>
 
-          <main>
-            <TaxonomySearch 
-              taxonomy={props.taxonomy} />
+          <TaxonomySearch 
+              taxonomy={props.taxonomy} 
+              onSelect={props.onSelectTerm} />
 
+          <main>
             <TreeView 
-              config={props.config}
               taxonomy={props.taxonomy}
               onSelect={props.onSelectTerm} />
           </main>
