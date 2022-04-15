@@ -1,6 +1,6 @@
 {
   "name": "@recogito/form-widgets",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "description": "Editor widgets for Annotorious and RecogitoJS that implement common form input elements",
   "main": "dist/recogito-form-widgets.js",
   "scripts": {
