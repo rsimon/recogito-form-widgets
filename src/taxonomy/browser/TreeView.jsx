@@ -86,9 +86,11 @@ const TreeView = props => {
         onSetOpen={onSetLeafState} />);
 
   return (
-    <ul>
-      {rootNodes}
-    </ul>
+    <div className="r6o-taxonomy r6o-taxonomytree">
+      <ul>
+        {rootNodes}
+      </ul>
+    </div>
   ) 
 
 }

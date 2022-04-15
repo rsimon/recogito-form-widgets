@@ -2,7 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Rnd } from 'react-rnd';
 import { RiCloseFill } from 'react-icons/ri';
+
 import TreeView from './TreeView';
+import TaxonomySearch from './TaxonomySearch';
 
 const TaxonomyBrowser = props => {
 
@@ -25,6 +27,9 @@ const TaxonomyBrowser = props => {
           </header>
 
           <main>
+            <TaxonomySearch 
+              taxonomy={props.taxonomy} />
+
             <TreeView 
               config={props.config}
               taxonomy={props.taxonomy}

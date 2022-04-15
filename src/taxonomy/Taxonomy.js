@@ -1,3 +1,10 @@
+import FlexSearch from 'flexsearch';
+
+const termToDocument = term => ({
+  id: term.uri,
+  labels: term.labels.map(l => l.label).join(' ')
+});
+
 const normalizeLabels = labels => {
   if (Array.isArray(labels)) {
     // Array of strings or { label, lang }
@@ -55,9 +62,23 @@ export class Taxonomy {
 
       return labelB - labelA;
     });
+
+    // Fulltext search, using term URI as primary key
+    this.searchIndex = new FlexSearch.Document({
+      document: {
+        id: 'id',
+        index: [
+          'labels',
+        ]
+      },
+      tokenize: 'full'
+    });
+
+    this.allTermsSorted.forEach(term =>
+      this.searchIndex.add(termToDocument(term)));
   }
 
-  findByURI = uri => 
+  findByURI = uri =>
     this.allTermsSorted.find(t => t.uri === uri);
 
   getChildren = uri =>
@@ -65,5 +86,15 @@ export class Taxonomy {
 
   listTerms = () =>
     this.allTermsSorted;
+
+  search = query => {
+    const r = this.searchIndex.search(query);
+
+    // Resolve awkward flexsearch result
+    return Array.from(
+      r.reduce((ids, r) =>
+        new Set([...ids, ...r.result]), new Set())
+    ).map(id => this.findByURI(id));
+  }
 
 }
