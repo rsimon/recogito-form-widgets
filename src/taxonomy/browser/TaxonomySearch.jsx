@@ -43,7 +43,9 @@ const TaxonomySearch = props => {
     } else if (evt.key === 'Enter') {
       evt.preventDefault();
 
-      const selected = results.find(r => r.getPrefLabel().label.toLowerCase() === search.toLowerCase());
+      const selected = props.taxonomy.search(search)
+        .find(r => r.getPrefLabel().label.toLowerCase() === search.toLowerCase());
+        
       if (selected) {
         props.onSelect(selected);
       } else if (highlightedIndex >= 0) {
