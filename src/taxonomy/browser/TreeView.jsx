@@ -15,7 +15,7 @@ const TreeNode = props => {
 
   useEffect(() => {
     if (el.current && props.highlighted === uri)
-      el.current.scrollIntoView({ behavior: 'smooth' });
+      el.current.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
   }, []);
 
   const childNodes = children.map((n, idx) => 
