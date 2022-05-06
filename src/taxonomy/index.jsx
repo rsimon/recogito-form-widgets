@@ -27,13 +27,23 @@ const loadTaxonomy = async config => {
 
   if (config.src) {
     // Remote fetch
-    return fetch(config.src)
-      .then(response => response.json())
-      .then(result => {
-        const taxonomy = loadFn(result);
-        CACHED_TAXONOMY = taxonomy;
-        return taxonomy;
-      });
+    const urls = Array.isArray(config.src) ? config.src : [ config.src ];
+
+    const tryOne = url => {
+      return fetch(url)
+        .then(response => response.json())
+        .then(result => {
+          const taxonomy = loadFn(result);
+          CACHED_TAXONOMY = taxonomy;
+          return taxonomy;
+        }).catch(err => {
+          console.log(`Failed to load taxonomy from ${url}`);
+          if (urls.length > 0)
+            return tryOne(urls.shift());
+        });
+    }
+
+    return tryOne(urls.shift());
   } else if (config.taxonomy) {
     // Local parse
     return new Promise(resolve => {

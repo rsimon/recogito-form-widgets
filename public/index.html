@@ -53,7 +53,10 @@
           content: 'content',
           widgets: [
             'COMMENT',
-            Recogito.Form.Taxonomy({ src: 'taxonomy.json', format: 'JSKOS' })
+            Recogito.Form.Taxonomy({ 
+              src: ['broken-link.json', 'taxonomy.json'], 
+              format: 'JSKOS' 
+            })
           ]
         });
 
