@@ -83,8 +83,19 @@ const Autocomplete = props => {
       onSubmit();
     } else if (evt.which === 27) {
       props.onCancel && props.onCancel();
+    } else if (evt.which === 9) {
+      // Tab
+      evt.preventDefault();
+      if (suggestions.length > 0) {
+        const idx = highlightedIndex === null ? 0 : highlightedIndex;
+        props.onSubmit(suggestions[idx]);
+
+        setValue('');
+        setSuggestions([]);
+        setHighlightedIndex(null);
+      }
     } else {
-      // Neither enter nor cancel
+      // Neither Enter, Cancel nor Tab
       if (suggestions.length > 0) {
         if (evt.which === 38) {
           // Key up
