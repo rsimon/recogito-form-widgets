@@ -3,7 +3,7 @@ import { BiNetworkChart } from 'react-icons/bi';
 import { RiNodeTree } from 'react-icons/ri';
 import { CSSTransition } from 'react-transition-group';
 
-import Autocomplete from '@recogito/recogito-client-core/src/editor/widgets/Autocomplete';
+import Autocomplete from './Autocomplete';
 import { CloseIcon } from '@recogito/recogito-client-core/src/Icons';
 
 const TaxonomyTagInput = props => {
